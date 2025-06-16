@@ -160,5 +160,3 @@ const Board = ({ gameEngine, cellSize = 30 }) => {
 };
 
 export default Board;
-
-export default Board;

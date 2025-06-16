@@ -4,7 +4,6 @@ import { HashRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import '../assets/styles/main.css';
 import '../assets/styles/tetris.css';
-import '../assets/styles/tetris3d.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

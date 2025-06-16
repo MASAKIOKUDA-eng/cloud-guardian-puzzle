@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # または master など、メインブランチ名に合わせて変更
+      - main
 
 permissions:
   contents: write
@@ -24,11 +24,16 @@ jobs:
       - name: Install dependencies 📦
         run: npm ci
 
+      - name: Copy assets to public directory
+        run: |
+          mkdir -p public/assets/images/aws
+          cp -r assets/images/aws/*.png public/assets/images/aws/
+
       - name: Build 🔧
         run: npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist  # ビルド出力ディレクトリ
-          branch: gh-pages  # デプロイ先のブランチ
+          folder: dist
+          branch: gh-pages
