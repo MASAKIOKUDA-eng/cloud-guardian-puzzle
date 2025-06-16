@@ -145,7 +145,7 @@ const Board = ({ gameEngine, cellSize = 30 }) => {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [gameEngine]);
+  }, [gameEngine, imagesLoaded, serviceImages]);
   
   return (
     <div className="tetris-board">
@@ -158,5 +158,7 @@ const Board = ({ gameEngine, cellSize = 30 }) => {
     </div>
   );
 };
+
+export default Board;
 
 export default Board;

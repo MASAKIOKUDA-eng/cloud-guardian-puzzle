@@ -299,7 +299,7 @@ class GameEngine {
     
     // 現在のブロックをボードに追加
     if (this.currentBlock) {
-      const { shape } = this.currentBlock;
+      const { shape, type, color } = this.currentBlock;
       const { x, y } = this.currentPosition;
       
       for (let row = 0; row < shape.length; row++) {
