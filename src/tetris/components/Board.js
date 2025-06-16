@@ -4,7 +4,7 @@ import { BlockTypes } from '../models/BlockTypes';
 /**
  * テトリスのゲームボードコンポーネント
  */
-const Board = ({ gameEngine, cellSize = 30 }) => {
+const Board = ({ gameEngine, cellSize = 40 }) => {
   const canvasRef = useRef(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [serviceImages, setServiceImages] = useState({});

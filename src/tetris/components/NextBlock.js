@@ -4,7 +4,7 @@ import { BlockTypes } from '../models/BlockTypes';
 /**
  * 次のブロックを表示するコンポーネント
  */
-const NextBlock = ({ gameEngine, cellSize = 20 }) => {
+const NextBlock = ({ gameEngine, cellSize = 30 }) => {
   const canvasRef = useRef(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [serviceImages, setServiceImages] = useState({});
