@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>クラウド・ガーディアン：セキュアパズル</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <meta name="description" content="AWS GovCloudのセキュリティとコンプライアンスをテーマにしたパズルゲーム">
+  <link rel="icon" href="favicon.ico">
+  <!-- GitHub Pages用のSPA対応スクリプト -->
+  <script type="text/javascript">
+    // GitHub Pagesでのシングルページアプリケーション用リダイレクト
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
 </head>
 <body>
   <div id="root"></div>

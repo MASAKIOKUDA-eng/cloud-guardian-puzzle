@@ -19,14 +19,15 @@
     "govcloud",
     "security",
     "puzzle",
-    "game"
+    "game",
+    "tetris"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MASAKIOKUDA-eng/cloud-guardian-puzzle/issues"
   },
-  "homepage": "https://github.com/MASAKIOKUDA-eng/cloud-guardian-puzzle#readme",
+  "homepage": "https://MASAKIOKUDA-eng.github.io/cloud-guardian-puzzle",
   "dependencies": {
     "phaser": "^3.55.2",
     "react": "^18.2.0",

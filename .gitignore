@@ -1,16 +1,16 @@
-# 依存関係
+# dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# テスト
+# testing
 /coverage
 
-# ビルド
+# production
 /build
 /dist
 
-# その他
+# misc
 .DS_Store
 .env.local
 .env.development.local
@@ -20,9 +20,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# エディタ設定
-.idea/
-.vscode/
-*.swp
-*.swo

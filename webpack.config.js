@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: process.env.NODE_ENV === 'production' ? '/cloud-guardian-puzzle/' : '/'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -30,20 +30,18 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
-  ],
   devServer: {
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, 'public'),
     },
     port: 3000,
-    hot: true
-  }
+    open: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'index.html'
+    })
+  ]
 };
