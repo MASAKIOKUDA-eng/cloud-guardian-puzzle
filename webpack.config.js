@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: './'
+    publicPath: ''
   },
   module: {
     rules: [
@@ -49,10 +49,6 @@ module.exports = {
         { 
           from: 'public/assets', 
           to: 'assets' 
-        },
-        {
-          from: 'public/404.html',
-          to: '404.html'
         }
       ]
     })
