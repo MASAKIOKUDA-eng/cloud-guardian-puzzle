@@ -4,7 +4,7 @@ import { BlockTypes } from '../models/BlockTypes';
 /**
  * 次のブロックを表示するコンポーネント
  */
-const NextBlock = ({ gameEngine, cellSize = 30 }) => {
+const NextBlock = ({ gameEngine, cellSize = 30, title = "次のブロック" }) => {
   const canvasRef = useRef(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [serviceImages, setServiceImages] = useState({});
@@ -140,7 +140,7 @@ const NextBlock = ({ gameEngine, cellSize = 30 }) => {
   
   return (
     <div className="next-block">
-      <h3>次のブロック</h3>
+      <h3>{title}</h3>
       <canvas
         ref={canvasRef}
         width={6 * cellSize}
