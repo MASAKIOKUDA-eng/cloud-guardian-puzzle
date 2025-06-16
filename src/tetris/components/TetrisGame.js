@@ -97,6 +97,42 @@ const TetrisGame = () => {
                   <li>複数行を同時に消すと、基本点数に加えてボーナスポイントが加算されます</li>
                   <li>セキュリティレベルが上がると、ゲームの難易度も上がります</li>
                 </ul>
+
+                <h4>高得点配置例</h4>
+                <div className="placement-examples">
+                  <div className="example">
+                    <h5>コンプライアンス対応 (1500ポイント)</h5>
+                    <div className="example-grid">
+                      <div className="example-block kms">KMS</div>
+                      <div className="example-block cloudtrail">CloudTrail</div>
+                      <div className="example-block iam">IAM</div>
+                      <div className="example-block empty"></div>
+                    </div>
+                    <p>同じ行にKMS、CloudTrail、IAMを配置</p>
+                  </div>
+
+                  <div className="example">
+                    <h5>サーバーレスセキュリティ (1200ポイント)</h5>
+                    <div className="example-grid">
+                      <div className="example-block lambda">Lambda</div>
+                      <div className="example-block iam">IAM</div>
+                      <div className="example-block cloudtrail">CloudTrail</div>
+                      <div className="example-block empty"></div>
+                    </div>
+                    <p>同じ行にLambda、IAM、CloudTrailを配置</p>
+                  </div>
+
+                  <div className="example">
+                    <h5>ゼロトラストセキュリティ (1000ポイント)</h5>
+                    <div className="example-grid">
+                      <div className="example-block iam">IAM</div>
+                      <div className="example-block vpc">VPC</div>
+                      <div className="example-block ec2">EC2</div>
+                      <div className="example-block empty"></div>
+                    </div>
+                    <p>同じ行にIAM、VPC、EC2を配置</p>
+                  </div>
+                </div>
                 
                 <h4>操作方法</h4>
                 <ul>
@@ -126,11 +162,11 @@ const TetrisGame = () => {
             
             <div className="side-panel">
               <NextBlock gameEngine={gameEngine} />
-              <GameControls gameEngine={gameEngine} onRestart={restartGame} />
               <div className="stats">
                 <h3>スコア: {score}</h3>
                 <h3>セキュリティレベル: {securityLevel}</h3>
               </div>
+              <GameControls gameEngine={gameEngine} onRestart={restartGame} />
             </div>
           </div>
           

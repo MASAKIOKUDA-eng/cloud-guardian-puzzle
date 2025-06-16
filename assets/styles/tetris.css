@@ -94,8 +94,21 @@
   font-size: 18px;
 }
 
-.game-controls {
+.stats {
   margin-bottom: 20px;
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats h3 {
+  margin: 5px 0;
+  color: #232f3e;
+  font-size: 18px;
+}
+
+.game-controls {
   background-color: #f8f8f8;
   padding: 15px;
   border-radius: 5px;
@@ -124,19 +137,6 @@
 
 .game-controls button:hover {
   background-color: #e88a00;
-}
-
-.stats {
-  background-color: #f8f8f8;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.stats h3 {
-  margin: 5px 0;
-  color: #232f3e;
-  font-size: 18px;
 }
 
 .security-rule-display {
@@ -221,4 +221,88 @@
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
+}
+
+/* 配置例のスタイル */
+.placement-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.example {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #232f3e;
+}
+
+.example-grid {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: #333;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.example-block {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.example-block.empty {
+  background-color: transparent;
+  border: none;
+}
+
+.example-block.kms {
+  background-color: #3B48CC;
+}
+
+.example-block.cloudtrail {
+  background-color: #2E73B8;
+}
+
+.example-block.iam {
+  background-color: #DD344C;
+}
+
+.example-block.lambda {
+  background-color: #FF9900;
+}
+
+.example-block.vpc {
+  background-color: #2473F3;
+}
+
+.example-block.ec2 {
+  background-color: #FF4F00;
+}
+
+.example-block.s3 {
+  background-color: #FF9900;
+}
+
+.example p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #555;
 }
