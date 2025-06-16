@@ -52,7 +52,8 @@ export const translations = {
       pause: "一時停止",
       resume: "再開",
       restart: "再スタート",
-      matchedRules: "達成したセキュリティルール"
+      matchedRules: "達成したセキュリティルール",
+      controls: "操作方法"
     },
     securityRules: {
       dataEncryption: {
@@ -132,7 +133,8 @@ export const translations = {
       pause: "Pause",
       resume: "Resume",
       restart: "Restart",
-      matchedRules: "Achieved Security Rules"
+      matchedRules: "Achieved Security Rules",
+      controls: "Controls"
     },
     securityRules: {
       dataEncryption: {

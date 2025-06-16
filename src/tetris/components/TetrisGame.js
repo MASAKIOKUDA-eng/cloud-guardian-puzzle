@@ -4,6 +4,8 @@ import Board from './Board';
 import NextBlock from './NextBlock';
 import GameControls from './GameControls';
 import SecurityRuleDisplay from './SecurityRuleDisplay';
+import AnimatedDemo from './AnimatedDemo';
+import ControlsGuide from './ControlsGuide';
 import { SecurityRules } from '../models/SecurityRules';
 import { useLanguage } from '../../i18n/LanguageContext';
 import LanguageSelector from '../../components/common/LanguageSelector';
@@ -18,7 +20,23 @@ const TetrisGame = () => {
   const [matchedRules, setMatchedRules] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
+  const [currentDemo, setCurrentDemo] = useState('compliance');
   const { translations } = useLanguage();
+  
+  // デモを定期的に切り替える
+  useEffect(() => {
+    if (showTutorial) {
+      const demoTypes = ['compliance', 'serverless', 'zeroTrust'];
+      let demoIndex = 0;
+      
+      const interval = setInterval(() => {
+        demoIndex = (demoIndex + 1) % demoTypes.length;
+        setCurrentDemo(demoTypes[demoIndex]);
+      }, 5000); // 5秒ごとに切り替え
+      
+      return () => clearInterval(interval);
+    }
+  }, [showTutorial]);
   
   // ゲームエンジンのイベントハンドラを設定
   useEffect(() => {
@@ -116,39 +134,8 @@ const TetrisGame = () => {
                 </ul>
 
                 <h4>{translations.tutorial.placementExamplesTitle}</h4>
-                <div className="placement-examples">
-                  <div className="example">
-                    <h5>{translations.tutorial.complianceExample.title}</h5>
-                    <div className="example-grid">
-                      <div className="example-block kms">KMS</div>
-                      <div className="example-block cloudtrail">CloudTrail</div>
-                      <div className="example-block iam">IAM</div>
-                      <div className="example-block empty"></div>
-                    </div>
-                    <p>{translations.tutorial.complianceExample.description}</p>
-                  </div>
-
-                  <div className="example">
-                    <h5>{translations.tutorial.serverlessExample.title}</h5>
-                    <div className="example-grid">
-                      <div className="example-block lambda">Lambda</div>
-                      <div className="example-block iam">IAM</div>
-                      <div className="example-block cloudtrail">CloudTrail</div>
-                      <div className="example-block empty"></div>
-                    </div>
-                    <p>{translations.tutorial.serverlessExample.description}</p>
-                  </div>
-
-                  <div className="example">
-                    <h5>{translations.tutorial.zeroTrustExample.title}</h5>
-                    <div className="example-grid">
-                      <div className="example-block iam">IAM</div>
-                      <div className="example-block vpc">VPC</div>
-                      <div className="example-block ec2">EC2</div>
-                      <div className="example-block empty"></div>
-                    </div>
-                    <p>{translations.tutorial.zeroTrustExample.description}</p>
-                  </div>
+                <div className="animated-demos">
+                  <AnimatedDemo demoType={currentDemo} />
                 </div>
                 
                 <h4>{translations.tutorial.controlsTitle}</h4>
@@ -181,6 +168,17 @@ const TetrisGame = () => {
                 <h3>{translations.gameUI.score}: {score}</h3>
                 <h3>{translations.gameUI.securityLevel}: {securityLevel}</h3>
               </div>
+              <ControlsGuide 
+                translations={{
+                  title: translations.tutorial.controlsTitle,
+                  moveLeft: translations.language === 'ja' ? "← : 左に移動" : "← : Move left",
+                  moveRight: translations.language === 'ja' ? "→ : 右に移動" : "→ : Move right",
+                  moveDown: translations.language === 'ja' ? "↓ : 下に移動" : "↓ : Move down",
+                  rotate: translations.language === 'ja' ? "↑ : 回転" : "↑ : Rotate",
+                  hardDrop: translations.language === 'ja' ? "スペース : 落下" : "Space : Hard drop",
+                  pause: translations.language === 'ja' ? "P : 一時停止/再開" : "P : Pause/Resume"
+                }}
+              />
               <GameControls 
                 gameEngine={gameEngine} 
                 onRestart={restartGame} 

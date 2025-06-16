@@ -138,6 +138,45 @@
   font-size: 18px;
 }
 
+.controls-guide {
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controls-guide h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #232f3e;
+  font-size: 18px;
+}
+
+.controls-guide ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.controls-guide li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.controls-guide .key {
+  display: inline-block;
+  background-color: #232f3e;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-right: 8px;
+  font-size: 12px;
+  min-width: 20px;
+  text-align: center;
+}
+
 .game-controls {
   background-color: #f8f8f8;
   padding: 15px;
@@ -335,4 +374,26 @@
   margin: 5px 0 0;
   font-size: 12px;
   color: #555;
+}
+
+/* アニメーションデモのスタイル */
+.animated-demos {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.animated-demo {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 15px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.animated-demo h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #232f3e;
 }
