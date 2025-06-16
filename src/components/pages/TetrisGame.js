@@ -1,5 +1,5 @@
 import React from 'react';
-import TetrisGame3D from '../../tetris3d/components/TetrisGame3D';
+import TetrisGame from '../../tetris/components/TetrisGame';
 
 /**
  * テトリスゲームページコンポーネント
@@ -7,7 +7,7 @@ import TetrisGame3D from '../../tetris3d/components/TetrisGame3D';
 const TetrisGamePage = () => {
   return (
     <div className="tetris-game-page">
-      <TetrisGame3D />
+      <TetrisGame />
     </div>
   );
 };

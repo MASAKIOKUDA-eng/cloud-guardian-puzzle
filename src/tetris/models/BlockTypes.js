@@ -10,7 +10,7 @@ export const BlockTypes = {
       [0, 0, 0]
     ],
     color: '#FF9900',
-    icon: 'assets/images/aws/s3.png',
+    icon: '/assets/images/aws/s3.png',
     securityLevel: 2,
     properties: {
       encryption: true,
@@ -23,7 +23,7 @@ export const BlockTypes = {
       [1, 1]
     ],
     color: '#FF4F00',
-    icon: 'assets/images/aws/ec2.png',
+    icon: '/assets/images/aws/ec2.png',
     securityLevel: 3,
     properties: {
       patchLevel: 'latest',
@@ -37,7 +37,7 @@ export const BlockTypes = {
       [0, 0, 0]
     ],
     color: '#2473F3',
-    icon: 'assets/images/aws/vpc.png',
+    icon: '/assets/images/aws/vpc.png',
     securityLevel: 4,
     properties: {
       privateSubnet: true,
@@ -51,7 +51,7 @@ export const BlockTypes = {
       [0, 0, 0]
     ],
     color: '#DD344C',
-    icon: 'assets/images/aws/iam.png',
+    icon: '/assets/images/aws/iam.png',
     securityLevel: 5,
     properties: {
       leastPrivilege: true,
@@ -65,7 +65,7 @@ export const BlockTypes = {
       [0, 0, 0]
     ],
     color: '#3B48CC',
-    icon: 'assets/images/aws/kms.png',
+    icon: '/assets/images/aws/kms.png',
     securityLevel: 4,
     properties: {
       keyRotation: true,
@@ -78,7 +78,7 @@ export const BlockTypes = {
       [0, 0, 0, 0]
     ],
     color: '#FF9900',
-    icon: 'assets/images/aws/lambda.png',
+    icon: '/assets/images/aws/lambda.png',
     securityLevel: 2,
     properties: {
       runtime: 'latest',
@@ -92,7 +92,7 @@ export const BlockTypes = {
       [1, 1, 0]
     ],
     color: '#2E73B8',
-    icon: 'assets/images/aws/cloudtrail.png',
+    icon: '/assets/images/aws/cloudtrail.png',
     securityLevel: 3,
     properties: {
       multiRegion: true,
