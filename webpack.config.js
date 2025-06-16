@@ -35,7 +35,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    port: 3000,
+    port: 3001,
     open: true
   },
   plugins: [
@@ -43,5 +43,10 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html'
     })
-  ]
+  ],
+  performance: {
+    hints: false,
+    maxEntrypointSize: 1024000,
+    maxAssetSize: 1024000
+  }
 };

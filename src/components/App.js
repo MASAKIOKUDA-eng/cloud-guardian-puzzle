@@ -2,11 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './common/Header';
 import Footer from './common/Footer';
-import Home from './pages/Home';
-import LevelSelect from './pages/LevelSelect';
-import GameBoard from './pages/GameBoard';
-import Tutorial from './pages/Tutorial';
-import Leaderboard from './pages/Leaderboard';
 import TetrisGame from './pages/TetrisGame';
 import NotFound from './pages/NotFound';
 
@@ -16,12 +11,7 @@ const App = () => {
       <Header />
       <main className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/levels" element={<LevelSelect />} />
-          <Route path="/game/:levelId" element={<GameBoard />} />
-          <Route path="/tetris" element={<TetrisGame />} />
-          <Route path="/tutorial" element={<Tutorial />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/" element={<TetrisGame />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
