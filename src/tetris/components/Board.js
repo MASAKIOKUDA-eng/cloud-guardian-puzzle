@@ -37,7 +37,46 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     });
   }, []);
   
-  // ボードの描画
+  // キーボード操作の設定
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      switch (e.key) {
+        case 'ArrowLeft':
+          gameEngine.moveLeft();
+          break;
+        case 'ArrowRight':
+          gameEngine.moveRight();
+          break;
+        case 'ArrowDown':
+          gameEngine.moveDown();
+          break;
+        case 'ArrowUp':
+          gameEngine.rotate();
+          break;
+        case ' ':
+          gameEngine.hardDrop();
+          break;
+        case 'p':
+        case 'P':
+          if (gameEngine.paused) {
+            gameEngine.resume();
+          } else {
+            gameEngine.pause();
+          }
+          break;
+        default:
+          break;
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [gameEngine]);
+  
+  // ゲームボードの描画
   const drawBoard = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -72,7 +111,6 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     for (let row = 0; row < board.length; row++) {
       for (let col = 0; col < board[row].length; col++) {
         const cell = board[row][col];
-        
         if (cell) {
           const x = col * cellSize;
           const y = row * cellSize;
@@ -82,15 +120,9 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
           ctx.fillRect(x, y, cellSize, cellSize);
           
           // ブロックの枠線
-          ctx.strokeStyle = '#fff';
-          ctx.lineWidth = 2;
+          ctx.strokeStyle = cell.current ? '#fff' : '#ddd';
+          ctx.lineWidth = cell.current ? 2 : 1;
           ctx.strokeRect(x, y, cellSize, cellSize);
-          
-          // 現在のブロックは少し明るく表示
-          if (cell.current) {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.fillRect(x, y, cellSize, cellSize);
-          }
           
           // AWSサービスアイコンを表示（画像が読み込まれている場合）
           if (imagesLoaded && cell.type && serviceImages[cell.type]) {
@@ -111,32 +143,31 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
               ctx.textBaseline = 'middle';
               ctx.fillText(cell.type.charAt(0), x + cellSize / 2, y + cellSize / 2);
             }
-          } else {
+          } else if (cell.type) {
             // 画像が読み込まれていない場合は頭文字を表示
             ctx.fillStyle = '#fff';
             ctx.font = `${cellSize / 2}px Arial`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText(cell.type ? cell.type.charAt(0) : '', x + cellSize / 2, y + cellSize / 2);
+            ctx.fillText(cell.type.charAt(0), x + cellSize / 2, y + cellSize / 2);
           }
         }
       }
     }
   };
   
-  // アニメーションフレームでボードを更新
+  // アニメーションフレームでゲームボードを更新
   useEffect(() => {
     let animationFrameId;
     let lastTime = 0;
     
     const render = (time) => {
-      // ゲームエンジンの更新
+      // ゲームの状態を更新
       gameEngine.update(time);
       
-      // ボードの描画
+      // ボードを描画
       drawBoard();
       
-      // 次のフレームをリクエスト
       animationFrameId = requestAnimationFrame(render);
     };
     
@@ -153,7 +184,7 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
         ref={canvasRef}
         width={gameEngine.cols * cellSize}
         height={gameEngine.rows * cellSize}
-        style={{ border: '2px solid #333' }}
+        style={{ border: '1px solid #333' }}
       />
     </div>
   );

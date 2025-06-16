@@ -284,10 +284,17 @@ class GameEngine {
   }
   
   /**
-   * ゲームの一時停止/再開
+   * ゲームの一時停止
    */
-  togglePause() {
-    this.paused = !this.paused;
+  pause() {
+    this.paused = true;
+  }
+  
+  /**
+   * ゲームの再開
+   */
+  resume() {
+    this.paused = false;
   }
   
   /**
