@@ -163,8 +163,34 @@
 }
 
 .mobile-view .start-screen button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 16px;
+  margin: 10px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mobile-view .start-screen .start-button {
+  padding: 15px 30px;
+  font-size: 20px;
+  margin-top: 20px;
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2473F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-view .start-screen .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* モバイル向けのセキュリティルール表示 */

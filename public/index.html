@@ -22,8 +22,16 @@
     
     // ダブルタップによるズームを防止
     document.addEventListener('touchend', function(e) {
-      if(e.target.tagName === 'CANVAS' || e.target.tagName === 'BUTTON') {
+      if(e.target.tagName === 'CANVAS') {
         e.preventDefault();
+      }
+    }, { passive: false });
+    
+    // スタートボタンのタッチイベントを確実に処理
+    document.addEventListener('touchstart', function(e) {
+      if(e.target.classList.contains('start-button')) {
+        e.preventDefault();
+        e.target.click();
       }
     }, { passive: false });
   </script>

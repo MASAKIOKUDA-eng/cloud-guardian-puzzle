@@ -30,7 +30,8 @@ const TetrisGame = () => {
     const checkMobile = () => {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-      setIsMobile(isMobileDevice || window.innerWidth <= 768);
+      const hasTouchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+      setIsMobile(isMobileDevice || hasTouchSupport || window.innerWidth <= 768);
     };
     
     checkMobile();
@@ -174,13 +175,13 @@ const TetrisGame = () => {
                   </div>
                 )}
               </div>
-              <button onClick={toggleTutorial}>{translations.startScreen.closeTutorialButton}</button>
-              <button onClick={startGame} className="start-button">{translations.startScreen.startButton}</button>
+              <button onClick={toggleTutorial} onTouchStart={toggleTutorial}>{translations.startScreen.closeTutorialButton}</button>
+              <button onClick={startGame} onTouchStart={startGame} className="start-button">{translations.startScreen.startButton}</button>
             </div>
           ) : (
             <div className="buttons">
-              <button onClick={toggleTutorial}>{translations.startScreen.tutorialButton}</button>
-              <button onClick={startGame} className="start-button">{translations.startScreen.startButton}</button>
+              <button onClick={toggleTutorial} onTouchStart={toggleTutorial}>{translations.startScreen.tutorialButton}</button>
+              <button onClick={startGame} onTouchStart={startGame} className="start-button">{translations.startScreen.startButton}</button>
             </div>
           )}
         </div>

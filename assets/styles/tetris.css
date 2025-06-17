@@ -80,6 +80,8 @@
 
 .start-screen .start-button {
   background-color: #2473F3;
+  position: relative;
+  z-index: 10;
 }
 
 .start-screen .start-button:hover {
