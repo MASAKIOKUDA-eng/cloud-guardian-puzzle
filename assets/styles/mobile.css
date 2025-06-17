@@ -3,6 +3,8 @@
 /* モバイルビュー全体のスタイル */
 .mobile-view {
   padding: 10px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-view h1 {
@@ -62,8 +64,10 @@
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  position: relative;
+  position: sticky;
+  bottom: 10px;
   z-index: 100;
+  touch-action: manipulation;
 }
 
 .mobile-controls-row {

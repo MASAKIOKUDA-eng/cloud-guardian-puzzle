@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 
 /**
@@ -7,9 +7,29 @@ import { useLanguage } from '../../i18n/LanguageContext';
 const MobileControls = ({ gameEngine }) => {
   const { translations } = useLanguage();
   
+  // コンポーネントがマウントされたときにスクロールを制御
+  useEffect(() => {
+    const handleScroll = (e) => {
+      // コントロールエリア内でのスクロールを防止
+      const controlsArea = document.querySelector('.mobile-controls-buttons');
+      if (controlsArea && controlsArea.contains(e.target)) {
+        e.preventDefault();
+      }
+    };
+    
+    // スクロールイベントリスナーを追加
+    document.addEventListener('touchmove', handleScroll, { passive: false });
+    
+    return () => {
+      // クリーンアップ
+      document.removeEventListener('touchmove', handleScroll);
+    };
+  }, []);
+  
   // タッチイベントのデフォルト動作を防止する関数
   const preventDefaultAndExecute = (callback) => (e) => {
     e.preventDefault();
+    e.stopPropagation();
     callback();
   };
   

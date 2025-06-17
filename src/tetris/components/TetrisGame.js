@@ -92,6 +92,18 @@ const TetrisGame = () => {
     setMatchedRules([]);
     setGameStarted(true);
     setShowTutorial(false);
+    
+    // スクロールをトップに戻す
+    window.scrollTo(0, 0);
+    
+    // モバイルでのスクロール制御を調整
+    if (isMobile) {
+      // ゲームエリアのみスクロールを制限
+      const gameArea = document.querySelector('.game-area');
+      if (gameArea) {
+        gameArea.style.touchAction = 'none';
+      }
+    }
   };
   
   // ゲームの再スタート
