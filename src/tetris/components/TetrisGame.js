@@ -237,6 +237,3 @@ const TetrisGame = () => {
 };
 
 export default TetrisGame;
-};
-
-export default TetrisGame;

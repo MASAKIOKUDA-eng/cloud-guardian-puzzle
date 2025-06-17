@@ -11,6 +11,7 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchStartY, setTouchStartY] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [lastTap, setLastTap] = useState(0);
   
   // デバイスタイプの検出
   useEffect(() => {
@@ -151,9 +152,7 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     gameEngine.rotate();
   };
   
-  // シングルタップの検出用
-  const [lastTap, setLastTap] = useState(0);
-  
+  // タップ処理
   const handleTap = (e) => {
     const currentTime = new Date().getTime();
     const tapLength = currentTime - lastTap;
@@ -308,7 +307,5 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     </div>
   );
 };
-
-export default Board;
 
 export default Board;
