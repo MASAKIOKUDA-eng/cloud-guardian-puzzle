@@ -18,14 +18,25 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     const checkMobile = () => {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-      setIsMobile(isMobileDevice || window.innerWidth <= 768);
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+      
+      // いずれかの条件を満たせばモバイルとして扱う
+      const mobileDetected = isMobileDevice || isTouchDevice || isSmallScreen;
+      setIsMobile(mobileDetected);
+      
+      console.log("Device detection:", { 
+        isMobileDevice, 
+        isTouchDevice, 
+        width: window.innerWidth, 
+        isMobile: mobileDetected 
+      });
       
       // モバイルデバイスの場合はセルサイズを調整
-      if (isMobileDevice || window.innerWidth <= 768) {
-        // 画面サイズに応じてセルサイズを動的に計算
+      if (mobileDetected) {
         const boardWidth = Math.min(window.innerWidth * 0.9, 400);
         const newCellSize = Math.floor(boardWidth / gameEngine.cols);
-        setCellSizeState(newCellSize);
+        setCellSizeState(Math.max(newCellSize, 20)); // 最小サイズを確保
       }
     };
     
@@ -109,21 +120,24 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
   
   // タッチ操作の設定
   const handleTouchStart = (e) => {
+    e.preventDefault(); // デフォルトの動作を防止
     const touch = e.touches[0];
     setTouchStartX(touch.clientX);
     setTouchStartY(touch.clientY);
   };
   
   const handleTouchMove = (e) => {
+    e.preventDefault(); // スクロールを防止
+    
     if (!touchStartX || !touchStartY) return;
     
     const touch = e.touches[0];
     const diffX = touch.clientX - touchStartX;
     const diffY = touch.clientY - touchStartY;
-    const threshold = 30; // スワイプを検出する閾値
+    const threshold = 20; // しきい値を下げて感度を上げる
     
     // 横方向のスワイプが縦方向より大きい場合
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+    if (Math.abs(diffX) > threshold) {
       if (diffX > 0) {
         gameEngine.moveRight();
       } else {
@@ -132,8 +146,8 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
       setTouchStartX(touch.clientX);
       setTouchStartY(touch.clientY);
     } 
-    // 縦方向のスワイプが横方向より大きい場合
-    else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > threshold) {
+    // 縦方向のスワイプが閾値を超えた場合
+    else if (Math.abs(diffY) > threshold) {
       if (diffY > 0) {
         gameEngine.moveDown();
       }
@@ -142,7 +156,8 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
     }
   };
   
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    e.preventDefault(); // デフォルトの動作を防止
     setTouchStartX(null);
     setTouchStartY(null);
   };
@@ -290,10 +305,10 @@ const Board = ({ gameEngine, cellSize = 40 }) => {
         ref={canvasRef}
         width={gameEngine.cols * cellSizeState}
         height={gameEngine.rows * cellSizeState}
-        style={{ border: '1px solid #333', maxWidth: '100%' }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        style={{ border: '1px solid #333', maxWidth: '100%', touchAction: 'none' }}
+        onTouchStart={(e) => handleTouchStart(e)}
+        onTouchMove={(e) => handleTouchMove(e)}
+        onTouchEnd={(e) => handleTouchEnd(e)}
         onClick={handleTap}
       />
       {isMobile && (

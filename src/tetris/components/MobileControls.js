@@ -7,25 +7,31 @@ import { useLanguage } from '../../i18n/LanguageContext';
 const MobileControls = ({ gameEngine }) => {
   const { translations } = useLanguage();
   
-  const handleLeftClick = () => {
+  // タッチイベントのデフォルト動作を防止する関数
+  const preventDefaultAndExecute = (callback) => (e) => {
+    e.preventDefault();
+    callback();
+  };
+  
+  const handleLeftClick = preventDefaultAndExecute(() => {
     gameEngine.moveLeft();
-  };
+  });
   
-  const handleRightClick = () => {
+  const handleRightClick = preventDefaultAndExecute(() => {
     gameEngine.moveRight();
-  };
+  });
   
-  const handleDownClick = () => {
+  const handleDownClick = preventDefaultAndExecute(() => {
     gameEngine.moveDown();
-  };
+  });
   
-  const handleRotateClick = () => {
+  const handleRotateClick = preventDefaultAndExecute(() => {
     gameEngine.rotate();
-  };
+  });
   
-  const handleDropClick = () => {
+  const handleDropClick = preventDefaultAndExecute(() => {
     gameEngine.hardDrop();
-  };
+  });
   
   return (
     <div className="mobile-controls-buttons">
@@ -33,6 +39,7 @@ const MobileControls = ({ gameEngine }) => {
         <button 
           className="mobile-control-button rotate-button" 
           onClick={handleRotateClick}
+          onTouchStart={handleRotateClick}
           aria-label={translations.mobileControls?.rotate || "Rotate"}
         >
           <span className="control-icon">↻</span>
@@ -42,6 +49,7 @@ const MobileControls = ({ gameEngine }) => {
         <button 
           className="mobile-control-button left-button" 
           onClick={handleLeftClick}
+          onTouchStart={handleLeftClick}
           aria-label={translations.mobileControls?.left || "Left"}
         >
           <span className="control-icon">←</span>
@@ -49,6 +57,7 @@ const MobileControls = ({ gameEngine }) => {
         <button 
           className="mobile-control-button down-button" 
           onClick={handleDownClick}
+          onTouchStart={handleDownClick}
           aria-label={translations.mobileControls?.down || "Down"}
         >
           <span className="control-icon">↓</span>
@@ -56,6 +65,7 @@ const MobileControls = ({ gameEngine }) => {
         <button 
           className="mobile-control-button right-button" 
           onClick={handleRightClick}
+          onTouchStart={handleRightClick}
           aria-label={translations.mobileControls?.right || "Right"}
         >
           <span className="control-icon">→</span>
@@ -65,6 +75,7 @@ const MobileControls = ({ gameEngine }) => {
         <button 
           className="mobile-control-button drop-button" 
           onClick={handleDropClick}
+          onTouchStart={handleDropClick}
           aria-label={translations.mobileControls?.drop || "Drop"}
         >
           <span className="control-icon">⤓</span>
