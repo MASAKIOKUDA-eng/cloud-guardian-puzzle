@@ -5,6 +5,7 @@ import App from './components/App';
 import { LanguageProvider } from './i18n/LanguageContext';
 import '../assets/styles/main.css';
 import '../assets/styles/tetris.css';
+import '../assets/styles/mobile.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

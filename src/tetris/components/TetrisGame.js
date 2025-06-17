@@ -3,6 +3,7 @@ import GameEngine from '../engine/GameEngine';
 import Board from './Board';
 import NextBlock from './NextBlock';
 import GameControls from './GameControls';
+import MobileControls from './MobileControls';
 import SecurityRuleDisplay from './SecurityRuleDisplay';
 import AnimatedDemo from './AnimatedDemo';
 import ControlsGuide from './ControlsGuide';
@@ -21,7 +22,24 @@ const TetrisGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
   const [currentDemo, setCurrentDemo] = useState('compliance');
+  const [isMobile, setIsMobile] = useState(false);
   const { translations } = useLanguage();
+  
+  // デバイスタイプの検出
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+      setIsMobile(isMobileDevice || window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
   
   // デモを定期的に切り替える
   useEffect(() => {
@@ -86,7 +104,7 @@ const TetrisGame = () => {
   };
   
   return (
-    <div className="tetris-game">
+    <div className={`tetris-game ${isMobile ? 'mobile-view' : ''}`}>
       <h1>{translations.gameTitle}</h1>
       <div className="language-container">
         <LanguageSelector />
@@ -144,6 +162,17 @@ const TetrisGame = () => {
                     <li key={index}>{control}</li>
                   ))}
                 </ul>
+                
+                {isMobile && (
+                  <div className="mobile-instructions">
+                    <h4>{translations.tutorial.mobileControlsTitle || "モバイル操作方法"}</h4>
+                    <ul>
+                      <li>{translations.tutorial.mobileSwipe || "スワイプ: 左右移動・下に落とす"}</li>
+                      <li>{translations.tutorial.mobileDoubleTap || "ダブルタップ: 回転"}</li>
+                      <li>{translations.tutorial.mobileButtons || "画面下部のボタン: 直接操作"}</li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <button onClick={toggleTutorial}>{translations.startScreen.closeTutorialButton}</button>
               <button onClick={startGame} className="start-button">{translations.startScreen.startButton}</button>
@@ -157,7 +186,7 @@ const TetrisGame = () => {
         </div>
       ) : (
         <div className="game-container">
-          <div className="game-area">
+          <div className={`game-area ${isMobile ? 'mobile-game-area' : ''}`}>
             <div className="main-board">
               <Board gameEngine={gameEngine} />
             </div>
@@ -168,17 +197,19 @@ const TetrisGame = () => {
                 <h3>{translations.gameUI.score}: {score}</h3>
                 <h3>{translations.gameUI.securityLevel}: {securityLevel}</h3>
               </div>
-              <ControlsGuide 
-                translations={{
-                  title: translations.tutorial.controlsTitle,
-                  moveLeft: translations.language === 'ja' ? "← : 左に移動" : "← : Move left",
-                  moveRight: translations.language === 'ja' ? "→ : 右に移動" : "→ : Move right",
-                  moveDown: translations.language === 'ja' ? "↓ : 下に移動" : "↓ : Move down",
-                  rotate: translations.language === 'ja' ? "↑ : 回転" : "↑ : Rotate",
-                  hardDrop: translations.language === 'ja' ? "スペース : 落下" : "Space : Hard drop",
-                  pause: translations.language === 'ja' ? "P : 一時停止/再開" : "P : Pause/Resume"
-                }}
-              />
+              {!isMobile && (
+                <ControlsGuide 
+                  translations={{
+                    title: translations.tutorial.controlsTitle,
+                    moveLeft: translations.language === 'ja' ? "← : 左に移動" : "← : Move left",
+                    moveRight: translations.language === 'ja' ? "→ : 右に移動" : "→ : Move right",
+                    moveDown: translations.language === 'ja' ? "↓ : 下に移動" : "↓ : Move down",
+                    rotate: translations.language === 'ja' ? "↑ : 回転" : "↑ : Rotate",
+                    hardDrop: translations.language === 'ja' ? "スペース : 落下" : "Space : Hard drop",
+                    pause: translations.language === 'ja' ? "P : 一時停止/再開" : "P : Pause/Resume"
+                  }}
+                />
+              )}
               <GameControls 
                 gameEngine={gameEngine} 
                 onRestart={restartGame} 
@@ -195,10 +226,17 @@ const TetrisGame = () => {
             matchedRules={matchedRules} 
             title={translations.gameUI.matchedRules}
           />
+          
+          {isMobile && gameStarted && (
+            <MobileControls gameEngine={gameEngine} />
+          )}
         </div>
       )}
     </div>
   );
+};
+
+export default TetrisGame;
 };
 
 export default TetrisGame;

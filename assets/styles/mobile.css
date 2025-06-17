@@ -1,0 +1,216 @@
+/* モバイル向けのスタイル */
+
+/* モバイルビュー全体のスタイル */
+.mobile-view {
+  padding: 10px;
+}
+
+.mobile-view h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* モバイルゲームエリアのレイアウト */
+.mobile-game-area {
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-game-area .main-board {
+  margin-right: 0;
+  margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-game-area .side-panel {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.mobile-game-area .next-block,
+.mobile-game-area .stats,
+.mobile-game-area .game-controls {
+  width: 45%;
+  margin-bottom: 10px;
+}
+
+/* モバイル向けのタッチ操作説明 */
+.touch-instructions {
+  text-align: center;
+  margin: 10px 0;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.touch-instructions p {
+  margin: 5px 0;
+}
+
+/* モバイル向けのボタンコントロール */
+.mobile-controls-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.mobile-controls-row {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.mobile-control-button {
+  width: 60px;
+  height: 60px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: rgba(36, 115, 243, 0.8);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-control-button:active {
+  background-color: rgba(26, 95, 217, 0.9);
+  transform: scale(0.95);
+}
+
+.control-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+/* モバイル向けのチュートリアル */
+.mobile-view .tutorial {
+  padding: 15px;
+}
+
+.mobile-view .tutorial h3 {
+  font-size: 20px;
+}
+
+.mobile-view .tutorial h4 {
+  font-size: 16px;
+}
+
+.mobile-view .tutorial ul {
+  padding-left: 15px;
+}
+
+.mobile-view .tutorial li {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.mobile-instructions {
+  background-color: #f0f8ff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+/* モバイル向けのスタート画面 */
+.mobile-view .start-screen {
+  padding: 15px;
+}
+
+.mobile-view .start-screen h2 {
+  font-size: 22px;
+}
+
+.mobile-view .start-screen p {
+  font-size: 16px;
+}
+
+.mobile-view .start-screen button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* モバイル向けのセキュリティルール表示 */
+.mobile-view .security-rule-display {
+  margin-top: 15px;
+}
+
+.mobile-view .security-rule-display h3 {
+  font-size: 16px;
+}
+
+.mobile-view .rule-item {
+  font-size: 14px;
+}
+
+/* 画面サイズに応じた調整 */
+@media (max-width: 480px) {
+  .mobile-control-button {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .control-icon {
+    font-size: 24px;
+  }
+  
+  .mobile-view .tetris-board canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* 横向き画面の対応 */
+@media (max-width: 896px) and (orientation: landscape) {
+  .mobile-game-area {
+    flex-direction: row;
+  }
+  
+  .mobile-game-area .main-board {
+    margin-right: 15px;
+    margin-bottom: 0;
+    width: auto;
+  }
+  
+  .mobile-game-area .side-panel {
+    width: 30%;
+    flex-direction: column;
+  }
+  
+  .mobile-game-area .next-block,
+  .mobile-game-area .stats,
+  .mobile-game-area .game-controls {
+    width: 100%;
+  }
+  
+  .mobile-controls-buttons {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-control-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .control-icon {
+    font-size: 20px;
+  }
+}
